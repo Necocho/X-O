@@ -2,9 +2,16 @@
 #include "Cell.cpp"
 #include <vector>
 
+/**
+ * Класс представляет собой игру в крестики-нолики.
+ * Включает в себя игровое поле и логику для хода человека и компьютера.
+ */
 class TicTacToe {
     
 public:
+    /**
+     * Конструктор по умолчанию. Инициализирует игровое поле ячейками.
+     */
     TicTacToe() {
         
         for (int i = 0; i < 9; ++i) {
@@ -12,6 +19,9 @@ public:
         }
     }
 
+    /**
+     * Метод отрисовки текущего состояния игрового поля.
+     */
     void drawBoard() const {
         std::cout << "-------------" << std::endl;
         for (int i = 0; i < 3; ++i) {
@@ -25,6 +35,12 @@ public:
         }
     }
 
+    /**
+    * Выполняет ход игрока (человека или компьютера) в указанную ячейку.
+    * @param cellNumber Номер ячейки (1-9), куда будет выполнен ход.
+    * @param player Состояние игрока (X или O).
+    * @return true, если ход выполнен успешно, иначе false.
+    */
     bool makeMove(int cellNumber, Cell::State player) {
         if (cellNumber < 1 || cellNumber > 9) {
             std::cout << "Incorrect number. Try again." << std::endl;
@@ -47,6 +63,11 @@ public:
         return true;
     }
 
+    /**
+     * Проверяет, достигнута ли победа для указанного игрока.
+     * @param player Состояние игрока (X или O).
+     * @return true, если игрок выиграл, иначе false.
+     */
     bool checkWin(Cell::State player) const {
 
         for (int i = 0; i < 3; ++i) {
@@ -75,6 +96,10 @@ public:
         return false;
     }
 
+    /**
+     * Проверяет, заполнено ли игровое поле.
+     * @return true, если игровое поле заполнено, иначе false.
+     */
     bool isBoardFull() const {
         for (const auto& cell : cells) {
             if (!cell.isMarked()) {
